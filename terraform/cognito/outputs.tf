@@ -12,3 +12,7 @@ output "react_client_id" {
   description = "Client ID for React app"
   value       = aws_cognito_user_pool_client.react_client.id
 }
+
+output "user_pool_domain" {
+  value = aws_cognito_user_pool_domain.main.domain
+}

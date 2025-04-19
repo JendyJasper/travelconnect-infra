@@ -4,19 +4,19 @@ provider "aws" {
 
 # Retrieve secrets from AWS Secrets Manager
 data "aws_secretsmanager_secret_version" "facebook_client_id" {
-  secret_id = "travelconnect/facebook_client_clientid"
+  secret_id = "travelconnect/facebook_client_clientids"
 }
 
 data "aws_secretsmanager_secret_version" "facebook_client_secret" {
-  secret_id = "travelconnect/facebook_client_secret"
+  secret_id = "travelconnect/facebook_client_secrets"
 }
 
 data "aws_secretsmanager_secret_version" "google_client_id" {
-  secret_id = "travelconnect/google_client_clientid"
+  secret_id = "travelconnect/google_client_clientids"
 }
 
 data "aws_secretsmanager_secret_version" "google_client_secret" {
-  secret_id = "travelconnect/google_client_secret"
+  secret_id = "travelconnect/google_client_secrets"
 }
 
 module "cognito" {
