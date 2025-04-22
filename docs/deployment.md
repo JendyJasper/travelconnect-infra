@@ -26,3 +26,7 @@ Infrastructure Deployment
  - **gRPC Protos**: Defined `user.proto`, `meetup.proto`, `payment.proto`, etc. in `travelconnect-protos` (`06ee835`).
  - **Next**: User Service implementation, 9Pay integration (post-approval), Step 2 (User/Meetup Services).
 
+## Database Schema
+- **Users**: `user_id`, `cognito_id`, `email`, `name`, `role` (traveler/host), `verified`, `loyalty_points`, `created_at`, `updated_at`.
+- **Meetups**: `meetup_id`, `host_id`, `title`, `description`, `category`, `location`, `fee`, `capacity`, `chat_id`, `is_recurring`, `recurrence_rule`, `is_private`, `created_at`, `updated_at`. Recurring meetups are indefinite; hosts manually delete to stop (Q2 2025). Future `meetup_instances` table planned (Q4 2025).
+- **Payments**: `payment_id`, `meetup_id`, `traveler_id`, `host_id`, `amount`, `currency`, `status`, `proof_url`, `traveler_confirmed`, `created_at`, `verified_at`, `completed_at`.
