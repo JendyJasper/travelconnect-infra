@@ -16,10 +16,12 @@
          meetup_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
          host_id UUID NOT NULL REFERENCES users(user_id),
          title VARCHAR(255) NOT NULL,
+         description TEXT NOT NULL,
          category VARCHAR(50) NOT NULL,
          location VARCHAR(255) NOT NULL,
          fee DECIMAL(15,2) NOT NULL,
          capacity INTEGER NOT NULL,
+         chat_id UUID UNIQUE,
          is_recurring BOOLEAN DEFAULT FALSE,
          recurrence_rule VARCHAR(255),
          is_private BOOLEAN DEFAULT FALSE,
@@ -43,7 +45,16 @@
          completed_at TIMESTAMP WITH TIME ZONE
      );
 
+     -- Meetup Attendees table (new)
+     CREATE TABLE meetup_attendees (
+         meetup_id UUID NOT NULL REFERENCES meetups(meetup_id),
+         user_id UUID NOT NULL REFERENCES users(user_id),
+         joined_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+         PRIMARY KEY (meetup_id, user_id)
+     );
+
      -- Index for faster queries
      CREATE INDEX idx_users_cognito_id ON users(cognito_id);
      CREATE INDEX idx_meetups_host_id ON meetups(host_id);
      CREATE INDEX idx_payments_meetup_id ON payments(meetup_id);
+     CREATE INDEX idx_meetup_attendees_meetup_id ON meetup_attendees(meetup_id);
